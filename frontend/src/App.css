@@ -1,0 +1,33 @@
+#root {
+  margin: 0 auto;
+  padding: 2rem;
+  max-width: 800px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+input,
+textarea {
+  padding: 0.5rem;
+  font-size: 1rem;
+}
+
+button {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+}
+
+.results ul {
+  list-style: none;
+  padding: 0;
+}
+
+.results li {
+  margin-bottom: 0.5rem;
+}

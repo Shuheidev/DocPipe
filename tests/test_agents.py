@@ -6,13 +6,8 @@ import pytest
 
 sys.path.append(str(Path(__file__).resolve().parents[1]))  # noqa: E402
 
-from agents import (  # noqa: E402
-    BrdAgent,
-    FigmaAgent,
-    SolutionAgent,
-    StoryAgent,
-)
-
+from agents import (BrdAgent, FigmaAgent, SolutionAgent,  # noqa: E402
+                    StoryAgent)
 from agents.figma_agent import FigmaClient  # noqa: E402
 from agents.story_agent import JiraClient  # noqa: E402
 from schemas import ArtefactType, UploadPayload  # noqa: E402
