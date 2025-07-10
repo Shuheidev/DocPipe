@@ -33,3 +33,12 @@ Before publishing the site you should replace the placeholder value in `frontend
 ```
 
 The Vite configuration already sets `base: '/DocPipe/'` so the app loads correctly from the Pages URL.
+
+### Type Checking
+
+Run mypy to check the Python modules:
+
+```
+mypy
+```
+

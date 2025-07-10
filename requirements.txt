@@ -8,3 +8,4 @@ pytest-asyncio
 flake8
 isort
 mypy
+types-PyYAML
