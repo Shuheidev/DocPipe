@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+jinja2
+PyYAML
+pydantic
+pytest
+pytest-asyncio
+flake8
+isort
+mypy
