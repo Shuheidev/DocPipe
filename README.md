@@ -36,7 +36,7 @@ Before publishing the site you should replace the placeholder value in `frontend
 "homepage": "https://<your-username>.github.io/DocPipe/"
 ```
 
-The Vite configuration already sets `base: '/DocPipe/'` so the app loads correctly from the Pages URL.
+The Vite configuration already sets `base: '/DocPipe/'` so the app loads correctly from the Pages URL. Remember that GitHub Pages is **static hosting only**. You must run the FastAPI backend elsewhere (for example on a cloud VM or PaaS) and expose it over HTTPS. Set `VITE_API_URL` in `frontend/.env` to point at this backend so the React app can POST to `/generate`.
 
 ### Type Checking
 

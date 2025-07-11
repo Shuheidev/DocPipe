@@ -57,6 +57,7 @@ Client (React) ---> /generate (FastAPI) ---> Agents ---> Output files
    ```
 
 The API will listen on `localhost:8000` by default. The frontend expects the API on the same origin unless `VITE_API_URL` is set.
+When the React app is hosted separately (e.g. on GitHub Pages) you must deploy the FastAPI service elsewhere and expose it over HTTPS. Set `VITE_API_URL` to this public endpoint so the POST request to `/generate` succeeds. The API includes CORS middleware allowing requests from any origin by default.
 
 ### Docker Compose
 
