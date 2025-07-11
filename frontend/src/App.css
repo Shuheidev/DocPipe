@@ -23,6 +23,19 @@ button {
   font-size: 1rem;
 }
 
+nav.tabs {
+  margin-bottom: 1rem;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.demo pre {
+  background: #f7f7f7;
+  padding: 0.5rem;
+  overflow-x: auto;
+}
+
+
 .results ul {
   list-style: none;
   padding: 0;
