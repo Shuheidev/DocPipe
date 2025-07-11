@@ -27,5 +27,9 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      - run: docker push ghcr.io/${{ github.repository }}:latest
+      - name: Push image
         if: github.ref == 'refs/heads/main'
+        run: |
+          IMAGE=$(echo ghcr.io/$GITHUB_REPOSITORY:latest | tr '[:upper:]' '[:lower:]')
+          docker tag docgen-pipeline "$IMAGE"
+          docker push "$IMAGE"
