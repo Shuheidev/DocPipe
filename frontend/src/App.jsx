@@ -19,11 +19,24 @@ function App() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(form),
       })
-      if (!resp.ok) throw new Error('Request failed')
+      if (!resp.ok) {
+        let message = 'Request failed'
+        try {
+          const err = await resp.json()
+          message = err.error || err.detail || JSON.stringify(err)
+        } catch {
+          try {
+            message = await resp.text()
+        } catch {
+          /* ignore parsing error */
+        }
+        }
+        throw new Error(message)
+      }
       const data = await resp.json()
       setResults(data)
     } catch (err) {
-      setResults({ error: err.message })
+      setResults({ error: 'Failed to generate docs', details: err.message })
     } finally {
       setLoading(false)
     }
@@ -54,17 +67,25 @@ function App() {
       {results && (
         <div className="results">
           <h2>Results</h2>
-          <ul>
-            {Array.isArray(results) ? (
-              results.map((r) => (
+          {Array.isArray(results) ? (
+            <ul>
+              {results.map((r) => (
                 <li key={r.artefact_type}>
                   {r.artefact_type}: <a href={r.path}>{r.path}</a>
                 </li>
-              ))
-            ) : (
-              <pre>{JSON.stringify(results, null, 2)}</pre>
-            )}
-          </ul>
+              ))}
+            </ul>
+          ) : (
+            <div className="error">
+              <p>{results.error}</p>
+              {results.details && (
+                <details>
+                  <summary>Details</summary>
+                  <pre>{results.details}</pre>
+                </details>
+              )}
+            </div>
+          )}
         </div>
       )}
     </div>

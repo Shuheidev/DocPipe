@@ -1,13 +1,17 @@
 from __future__ import annotations
 
 import asyncio
+import logging
 from datetime import datetime
 from pathlib import Path
 
-from fastapi import APIRouter, FastAPI
+from fastapi import APIRouter, FastAPI, HTTPException
+from typing import cast
 
 from agents import BrdAgent, FigmaAgent, SolutionAgent, StoryAgent
 from schemas import AgentResult, UploadPayload
+
+logger = logging.getLogger(__name__)
 
 router = APIRouter()
 app = FastAPI()
@@ -26,7 +30,19 @@ async def generate(payload: UploadPayload) -> list[AgentResult]:
     out_dir = timestamp_dir()
     payload.output_dir = out_dir
     agents = [BrdAgent(), SolutionAgent(), FigmaAgent(), StoryAgent()]
-    results = await asyncio.gather(*(a.execute(payload) for a in agents))
+    tasks = [a.execute(payload) for a in agents]
+    raw_results: list[AgentResult | BaseException] = await asyncio.gather(
+        *tasks, return_exceptions=True
+    )
+    results: list[AgentResult] = []
+    for agent, res in zip(agents, raw_results):
+        if isinstance(res, BaseException):
+            logger.exception("Agent %s failed", agent.name, exc_info=res)
+            raise HTTPException(
+                status_code=500,
+                detail=f"Agent {agent.name} failed: {res}",
+            )
+        results.append(cast(AgentResult, res))
     github = GitHubClient()
     await github.create_pr(out_dir)
     return results
