@@ -7,6 +7,7 @@ from pathlib import Path
 from typing import cast
 
 from fastapi import APIRouter, FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 
 from agents import BrdAgent, FigmaAgent, SolutionAgent, StoryAgent
 from schemas import AgentResult, UploadPayload
@@ -15,6 +16,12 @@ logger = logging.getLogger(__name__)
 
 router = APIRouter()
 app = FastAPI()
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 app.include_router(router)
 
 
