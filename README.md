@@ -23,3 +23,22 @@ npm run build
 ```
 
 The static files will be output to `frontend/dist`. The workflow in `.github/workflows/pages.yml` publishes this directory to GitHub Pages whenever changes are pushed to `main`.
+
+### GitHub Pages
+
+Before publishing the site you should replace the placeholder value in `frontend/package.json` with your GitHub username:
+
+```json
+"homepage": "https://<your-username>.github.io/DocPipe/"
+```
+
+The Vite configuration already sets `base: '/DocPipe/'` so the app loads correctly from the Pages URL.
+
+### Type Checking
+
+Run mypy to check the Python modules:
+
+```
+mypy
+```
+
