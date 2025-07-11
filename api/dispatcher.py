@@ -4,9 +4,9 @@ import asyncio
 import logging
 from datetime import datetime
 from pathlib import Path
+from typing import cast
 
 from fastapi import APIRouter, FastAPI, HTTPException
-from typing import cast
 
 from agents import BrdAgent, FigmaAgent, SolutionAgent, StoryAgent
 from schemas import AgentResult, UploadPayload

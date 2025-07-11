@@ -2,6 +2,10 @@
 
 Documentation generation Pipeline
 
+## Documentation
+
+Full usage and architecture details are provided in [docs/README.md](docs/README.md). Any contributor, human or AI, should ensure the documentation stays in sync with the codebase. See [docs/AI_GUIDELINES.md](docs/AI_GUIDELINES.md) for agent specific guidance.
+
 ## Frontend
 
 A small React application lives in the `frontend` directory. It provides a form to submit a project name and description to the `/generate` API endpoint and shows the generated artefacts. The app is built with [Vite](https://vitejs.dev/) and is automatically deployed to GitHub Pages via a workflow.
