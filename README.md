@@ -5,6 +5,7 @@ Documentation generation Pipeline
 ## Documentation
 
 Full usage and architecture details are provided in [docs/README.md](docs/README.md). Any contributor, human or AI, should ensure the documentation stays in sync with the codebase. See [docs/AI_GUIDELINES.md](docs/AI_GUIDELINES.md) for agent specific guidance.
+A demo output is available under [docs/salesforce_demo](docs/salesforce_demo/README.md) and is also viewable from the "Example" tab of the deployed frontend.
 
 ## Frontend
 

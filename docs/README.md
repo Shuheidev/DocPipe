@@ -83,6 +83,10 @@ Static type checking is configured via `mypy`:
 mypy
 ```
 
+## Example Output
+A set of mocked artefacts generated for a Salesforce UI component can be found in [docs/salesforce_demo](salesforce_demo/README.md). The same demo is presented in the frontend under the "Example" tab so visitors know what to expect.
+
+
 ## Directory Layout
 
 - `agents/` – asynchronous worker classes responsible for artefact creation.

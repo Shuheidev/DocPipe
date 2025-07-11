@@ -1,10 +1,12 @@
 import { useState } from 'react'
+import Demo from './Demo'
 import './App.css'
 
 function App() {
   const [form, setForm] = useState({ project_name: '', description: '' })
   const [results, setResults] = useState(null)
   const [loading, setLoading] = useState(false)
+  const [view, setView] = useState('generate')
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value })
@@ -45,26 +47,36 @@ function App() {
   return (
     <div className="container">
       <h1>DocPipe</h1>
-      <form onSubmit={submit}>
-        <input
-          name="project_name"
-          placeholder="Project Name"
-          value={form.project_name}
-          onChange={handleChange}
-          required
-        />
-        <textarea
-          name="description"
-          placeholder="Description"
-          value={form.description}
-          onChange={handleChange}
-          required
-        />
-        <button type="submit" disabled={loading}>
-          {loading ? 'Generating...' : 'Generate Docs'}
+      <nav className="tabs">
+        <button onClick={() => setView('generate')} disabled={view==='generate'}>
+          Generate
         </button>
-      </form>
-      {results && (
+        <button onClick={() => setView('demo')} disabled={view==='demo'}>
+          Example
+        </button>
+      </nav>
+      {view === 'generate' && (
+        <form onSubmit={submit}>
+          <input
+            name="project_name"
+            placeholder="Project Name"
+            value={form.project_name}
+            onChange={handleChange}
+            required
+          />
+          <textarea
+            name="description"
+            placeholder="Description"
+            value={form.description}
+            onChange={handleChange}
+            required
+          />
+          <button type="submit" disabled={loading}>
+            {loading ? 'Generating...' : 'Generate Docs'}
+          </button>
+        </form>
+      )}
+      {view === 'generate' && results && (
         <div className="results">
           <h2>Results</h2>
           {Array.isArray(results) ? (
@@ -88,6 +100,7 @@ function App() {
           )}
         </div>
       )}
+      {view === 'demo' && <Demo />}
     </div>
   )
 }
